@@ -44,9 +44,10 @@ jobs:
           npm start &
           npx wait-on http://localhost:3000
           npm run screenshot
-
-      - name: Run reg-suit
-        run: npm run regression
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run regression
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
