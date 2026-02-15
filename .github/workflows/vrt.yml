@@ -17,6 +17,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Workaround for Detached HEAD
+        if: github.event_name == 'pull_request'
+        run: |
+          git checkout ${{ github.head_ref }} || git checkout -b ${{ github.head_ref }}
+
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
