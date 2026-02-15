@@ -11,19 +11,32 @@ on:
 jobs:
   vrt:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Workaround for Detached HEAD
+        if: github.event_name == 'pull_request'
+        run: |
+          git checkout ${{ github.head_ref }} || git checkout -b ${{ github.head_ref }}
+
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
+
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
+
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -36,8 +49,23 @@ jobs:
           npm start &
           npx wait-on http://localhost:3000
           npm run screenshot
-
-      - name: Run reg-suit
-        run: npm run regression
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run regression
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const reportUrl = 'https://gin-2025-2.github.io/portfolio/';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🎨 **Visual Regression Test Report**\n\nThe visual regression test has completed.\nCheck the latest report here: [View VRT Report](${reportUrl})`
+            })
+
