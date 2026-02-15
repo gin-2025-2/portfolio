@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +26,16 @@ export function Navbar() {
         { href: "#projects", label: t("projects") },
         { href: "#contact", label: t("contact") },
     ];
+    ];
+
+    const locale = useLocale();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const toggleLocale = () => {
+        const nextLocale = locale === "ko" ? "en" : "ko";
+        router.replace(pathname, { locale: nextLocale });
+    };
 
     return (
         <nav
@@ -85,6 +95,22 @@ export function Navbar() {
                                     </a>
                                 </li>
                             ))}
+                            {/* Mobile Language Toggle */}
+                            <li className="pt-2 border-t border-gray-100 dark:border-gray-800">
+                                <button
+                                    onClick={() => {
+                                        toggleLocale();
+                                        setIsOpen(false);
+                                    }}
+                                    className="flex w-full items-center justify-between py-2 text-gray-600 hover:text-blue-600 dark:text-gray-300"
+                                >
+                                    <span>Language</span>
+                                    <span className="font-bold bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded text-xs">
+                                        {locale === "ko" ? "Korean" : "English"}
+                                    </span>
+                                </button>
+                            </li>
+
                         </ul>
                     </motion.div>
                 )}
