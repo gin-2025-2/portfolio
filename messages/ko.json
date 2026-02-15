@@ -1,0 +1,31 @@
+{
+    "Index": {
+        "title": "프론트엔드 개발자 포트폴리오"
+    },
+    "Nav": {
+        "about": "소개",
+        "skills": "기술 스택",
+        "projects": "프로젝트",
+        "contact": "연락처"
+    },
+    "Intro": {
+        "greeting": "안녕하세요, 저는 000입니다.",
+        "description": "사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다. 복잡한 문제를 단순하고 우아한 인터페이스로 해결하는 것을 좋아합니다."
+    },
+    "TechStack": {
+        "title": "기술 스택"
+    },
+    "Career": {
+        "title": "경력 요약"
+    },
+    "Projects": {
+        "title": "프로젝트"
+    },
+    "Contact": {
+        "title": "문의하기",
+        "description": "프로젝트에 대해 이야기하고 싶거나 질문이 있으신가요? 언제든지 연락주세요.",
+        "emailPlaceholder": "이메일 주소",
+        "messagePlaceholder": "메시지를 입력하세요",
+        "sendButton": "메시지 보내기"
+    }
+}
