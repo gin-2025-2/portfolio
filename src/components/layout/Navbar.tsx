@@ -26,9 +26,9 @@ export function Navbar() {
         { href: "#projects", label: t("projects") },
         { href: "#contact", label: t("contact") },
     ];
-    ];
 
     const locale = useLocale();
+
     const router = useRouter();
     const pathname = usePathname();
 
