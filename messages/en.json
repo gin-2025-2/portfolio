@@ -1,0 +1,31 @@
+{
+    "Index": {
+        "title": "Frontend Developer Portfolio"
+    },
+    "Nav": {
+        "about": "About",
+        "skills": "Skills",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
+    "Intro": {
+        "greeting": "Hello, I am 000.",
+        "description": "I am a frontend developer who prioritizes user experience. I love solving complex problems with simple and elegant interfaces."
+    },
+    "TechStack": {
+        "title": "Tech Stack"
+    },
+    "Career": {
+        "title": "Career Summary"
+    },
+    "Projects": {
+        "title": "Projects"
+    },
+    "Contact": {
+        "title": "Get in Touch",
+        "description": "Have a project in mind or just want to say hi? Feel free to send me a message.",
+        "emailPlaceholder": "Email Address",
+        "messagePlaceholder": "Your Message",
+        "sendButton": "Send Message"
+    }
+}

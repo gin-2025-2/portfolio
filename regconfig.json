@@ -1,0 +1,18 @@
+{
+    "core": {
+        "workingDir": ".reg",
+        "actualDir": "screenshot",
+        "thresholdRate": 0,
+        "ximgdiff": {
+            "invocationType": "client"
+        }
+    },
+    "plugins": {
+        "reg-keygen-git-hash-plugin": true,
+        "reg-publish-github-pages-plugin": {
+            "repository": "gin-2025-2/portfolio",
+            "branchName": "gh-pages",
+            "customDomain": ""
+        }
+    }
+}

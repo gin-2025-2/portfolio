@@ -1,3 +1,3 @@
 # portfolio
 
-check check PR
+Static portfolio page built with HTML and Tailwind CSS (CDN).
