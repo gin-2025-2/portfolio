@@ -35,7 +35,7 @@
 - **Framework**: Next.js 15+ (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS, PostCSS
-- **Animation**: `framer-motion` (필수), `react-animated-cursor` (마우스 효과), **Aceternity UI** (고품질 트렌디 효과)
+- **Animation**: `framer-motion` (필수), **CSS + Framer Motion 커스텀 커서** (React 19 호환), **Aceternity UI** (고품질 트렌디 효과)
 - **State/Utils**: `lodash` (데이터 처리), `zustand` (필요시 전역 상태)
 - **i18n**: `next-intl` 미들웨어 설정 (한국어/영어 지원)
 - **Testing**: `reg-suit` (VRT 리포트), `playwright` (E2E)
@@ -94,7 +94,7 @@
 
 ### 4. 고급 애니메이션 전략 (Interactive Web)
 단순한 페이드인을 넘어 사용자와 상호작용하는 웹을 만듭니다.
-- **마우스 인터랙션**: `react-animated-cursor`로 커스텀 커서 적용 (링크 호버 시 반응).
+- **마우스 인터랙션**: **CSS + Framer Motion 기반 커스텀 커서**로 구현 (React 19 호환, 링크 호버 시 반응).
 - **트렌디한 효과 (Aceternity UI 활용)**:
   - **Intro 섹션**: 'Background Beams' 또는 'Meteor Effect' 등으로 시선을 사로잡는 배경 구현.
   - **ProjectList**: 카드 호버 시 3D 틸트 효과나 글로우 효과 적용.

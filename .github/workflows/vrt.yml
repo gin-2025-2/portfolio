@@ -1,3 +1,4 @@
+
 name: Visual Regression Test
 
 on:
@@ -11,11 +12,6 @@ on:
 jobs:
   vrt:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,10 +45,9 @@ jobs:
           npm start &
           npx wait-on http://localhost:3000
           npm run screenshot
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run regression
+
+      - name: Run reg-suit
+        run: npm run regression
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
