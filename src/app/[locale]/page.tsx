@@ -5,11 +5,17 @@ import { ProjectList } from "@/components/pages/home/ProjectList";
 import { ContactArea } from "@/components/pages/home/ContactArea";
 import { cmsService } from "@/services/cms";
 
-export default async function Home() {
-  const introData = await cmsService.getIntroData();
-  const skills = await cmsService.getSkills();
-  const careers = await cmsService.getCareers();
-  const projects = await cmsService.getProjects();
+export default async function Home({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}) {
+  const { locale } = await params;
+
+  const introData = await cmsService.getIntroData(locale);
+  const skills = await cmsService.getSkills(locale);
+  const careers = await cmsService.getCareers(locale);
+  const projects = await cmsService.getProjects(locale);
 
   return (
     <div className="flex flex-col gap-10">
