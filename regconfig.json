@@ -9,15 +9,11 @@
     },
     "plugins": {
         "reg-keygen-git-hash-plugin": true,
-        "reg-notify-github-plugin": {
-            "clientId": "mzR8Q00X6p1f3t7i8r5e",
-            "prComment": true,
-            "prCommentBehavior": "default",
-            "shortDescription": false
-        },
         "reg-publish-github-pages-plugin": {
+            "repository": "gin-2025-2/portfolio",
             "branchName": "gh-pages",
-            "customDomain": ""
+            "customDomain": "",
+            "token": "$GITHUB_TOKEN" 
         }
     }
 }

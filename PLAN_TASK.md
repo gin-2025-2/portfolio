@@ -9,7 +9,7 @@
   - [ ] Next.js 15+ 초기화 (App Router, TypeScript, Tailwind, ESLint) <!-- id: 201 -->
   - [ ] `tsconfig.json` (경로 별칭) 및 `next.config.ts` 설정 <!-- id: 202 -->
   - [ ] 핵심 의존성 설치 (`clsx`, `tailwind-merge`, `lodash`, `lucide-react`) <!-- id: 203 -->
-  - [ ] 애니메이션 라이브러리 설치 (`framer-motion`, `react-animated-cursor`) <!-- id: 204 -->
+  - [ ] 애니메이션 라이브러리 설치 (`framer-motion`) <!-- id: 204 -->
   - [ ] i18n 및 테스트 도구 설치 (`next-intl`, `reg-suit`, `playwright`) <!-- id: 205 -->
   - [ ] 전역 스타일 및 폰트 설정 (`globals.css`, `pretendard` 변수) <!-- id: 206 -->
 
@@ -29,7 +29,7 @@
 
 - [ ] 5단계: 통합 및 고도화 (Interactive Web)
   - [ ] `next-intl` 설정 (미들웨어, 메시지 JSON) <!-- id: 500 -->
-  - [ ] `react-animated-cursor` 적용 (전역 Provider) <!-- id: 501 -->
+  - [ ] 커스텀 커서 구현 (CSS + Framer Motion, 전역 적용) <!-- id: 501 -->
   - [ ] Framer Motion 스크롤 애니메이션 미세 조정 (Stagger, FadeIn) <!-- id: 502 -->
 
 - [ ] 6단계: 검증 및 인계 (Verification & Handover)
