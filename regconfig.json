@@ -12,7 +12,8 @@
         "reg-publish-github-pages-plugin": {
             "repository": "gin-2025-2/portfolio",
             "branchName": "gh-pages",
-            "customDomain": ""
+            "customDomain": "",
+            "token": "$GITHUB_TOKEN" 
         }
     }
 }
