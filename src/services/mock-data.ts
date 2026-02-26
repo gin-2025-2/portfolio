@@ -27,7 +27,7 @@ export const mockCareers: Career[] = [
 
 export const mockProjects: Project[] = [
     {
-        title: "차세대 전기차(Tesla) 카셰어링 관리 시스템 (MVP)",
+        title: "차세대 전기차(Tesla) 카셰어링 관리 시스템 (MVP) 제작",
         subtitle: "Next.js × PWA",
         description: "노트북 한 대로 풀스택을 끝까지 만들고, 실제 서비스 운영까지 경험했습니다. 0→1 풀스택 MVP 개발: 신규 서비스 기획 단계부터 참여해 프론트엔드 기반을 설계·구현했습니다.",
         tags: ["Next.js 15", "Tailwind CSS", "Shadcn UI", "Neon(PostgreSQL)", "Prisma", "Auth0"],
