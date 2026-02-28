@@ -41,3 +41,4 @@ yarn-error.log*
 .reg/
 screenshot/
 
+test-results/.last-run.json

@@ -32,15 +32,18 @@ npm run screenshot
 echo "✅ Screenshots captured"
 echo ""
 
-# Step 4: Set up baseline
-echo "📍 Step 4: Setting up baseline..."
+# Step 4: Prepare images for comparison
+echo "📍 Step 4: Preparing images..."
+cp "screenshot/index.png" ".reg/actual/index.png"
+
+# Only set expected baseline on first run
 if [ ! -f ".reg/expected/index.png" ] || [ ! -s ".reg/expected/index.png" ]; then
     echo "📌 First run - Setting baseline..."
     cp ".reg/actual/index.png" ".reg/expected/index.png"
 else
-    echo "📌 Baseline exists - Ready for comparison"
+    echo "📌 Ready for comparison (baseline: expected, current: actual)"
 fi
-echo "✅ Baseline ready"
+echo "✅ Images ready"
 echo ""
 
 # Step 5: Run regression test with reg-cli

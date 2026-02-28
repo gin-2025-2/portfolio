@@ -28,6 +28,6 @@ test('Home Page Screenshot', async ({ page }) => {
     // Extra wait for animations to settle
     await page.waitForTimeout(2000);
 
-    // Take full page screenshot
-    await page.screenshot({ path: '.reg/actual/index.png', fullPage: true });
+    // Take full page screenshot to temp location
+    await page.screenshot({ path: 'screenshot/index.png', fullPage: true });
 });
