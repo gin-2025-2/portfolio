@@ -14,7 +14,8 @@
     },
     "reg-publish-s3-plugin": {
       "bucketName": "portfolio-vrt",
-      "endpoint": "https://3abd8e35859e1c4640b3ee8ebbef35fc.r2.cloudflarestorage.com"
+      "endpoint": "https://3abd8e35859e1c4640b3ee8ebbef35fc.r2.cloudflarestorage.com" ,
+      "region": "auto"
     }
   }
 }
