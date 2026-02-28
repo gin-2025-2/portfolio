@@ -102,13 +102,28 @@ jobs:
         run: |
           npx reg-cli .reg/actual .reg/expected .reg/diff -R .reg/index.html || true
 
+      - name: Prepare Versioned Report
+        run: |
+          # 커밋 해시 기반으로 폴더명 생성
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          REPORT_DIR="vrt-reports/${COMMIT_HASH}"
+          
+          mkdir -p "$REPORT_DIR"
+          cp -r .reg/* "$REPORT_DIR/"
+          
+          # 최신 리포트도 루트에 복사 (빠른 접근용)
+          cp -r .reg/* .
+          
+          echo "✅ Report prepared at: $REPORT_DIR"
+          echo "REPORT_URL=https://gin-2025-2.github.io/portfolio/vrt-reports/${COMMIT_HASH}/" >> $GITHUB_ENV
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.reg
-          force_orphan: true
+          publish_dir: ./
+          force_orphan: false
           enable_jekyll: false
 
       - name: Comment PR
@@ -116,10 +131,10 @@ jobs:
         if: github.event_name == 'pull_request' && always()
         with:
           script: |
-            const reportUrl = 'https://gin-2025-2.github.io/portfolio/';
+            const reportUrl = process.env.REPORT_URL || 'https://gin-2025-2.github.io/portfolio/';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🎨 **Visual Regression Test Report**\n\nThe visual regression test has completed.\nCheck the latest report here: [View VRT Report](${reportUrl})`
+              body: `🎨 **Visual Regression Test Report**\n\nThe visual regression test has completed.\nCheck the latest report here: [View VRT Report](${reportUrl})\n\nVersioned Report: [${process.env.REPORT_URL}](${process.env.REPORT_URL})`
             })
