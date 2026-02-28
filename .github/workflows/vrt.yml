@@ -81,71 +81,23 @@ jobs:
           # Kill server
           kill $SERVER_PID 2>/dev/null || true
 
-      - name: Fetch Baseline from gh-pages
+      - name: Set up Baseline
         run: |
           mkdir -p .reg/expected
-          # git clone을 통해 기존 gh-pages 브랜치에 저장된 예전 actual(스크린샷)을 가져와서 expected 기준으로 삼습니다.
-          git clone --depth=1 --branch=gh-pages https://github.com/${{ github.repository }}.git .gh-pages || echo "No gh-pages branch yet (First run)"
-          if [ -d ".gh-pages/actual" ]; then
-            cp -r .gh-pages/actual/* .reg/expected/ || true
+          if [ -f ".reg/actual/index.png" ]; then
+            cp .reg/actual/index.png .reg/expected/index.png
+            echo "✅ First run - baseline created"
           fi
-          rm -rf .gh-pages
 
-      - name: Prepare Files for gh-pages
+      - name: Generate VRT Report with reg-cli
         run: |
-          mkdir -p vrt-deploy
-          cp .reg/actual/index.png vrt-deploy/actual.png || echo "No actual image"
-          cp .reg/expected/index.png vrt-deploy/expected.png || echo "No expected image"
-          
-          # Copy diff folder if exists
-          if [ -d ".reg/diff" ]; then
-            cp -r .reg/diff vrt-deploy/ || true
-          fi
-          
-          # Create index.html
-          cat > vrt-deploy/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="ko">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>VRT Report</title>
-              <style>
-                  body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
-                  .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
-                  h1 { color: #333; }
-                  .images { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-                  .image-box { border: 1px solid #ddd; padding: 10px; }
-                  .image-box h3 { margin: 0 0 10px 0; }
-                  img { width: 100%; height: auto; }
-              </style>
-          </head>
-          <body>
-              <div class="container">
-                  <h1>Visual Regression Test</h1>
-                  <div class="images">
-                      <div class="image-box">
-                          <h3>Expected</h3>
-                          <img src="expected.png" alt="Expected">
-                      </div>
-                      <div class="image-box">
-                          <h3>Actual</h3>
-                          <img src="actual.png" alt="Actual">
-                      </div>
-                  </div>
-              </div>
-          </body>
-          </html>
-          EOF
-          
-          echo "✅ Files ready for deployment:"
-          ls -lah vrt-deploy/
+          npx reg-cli .reg/actual .reg/expected .reg/diff -R .reg/index.html || true
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./vrt-deploy
+          publish_dir: ./.reg
           force_orphan: true
           enable_jekyll: false
