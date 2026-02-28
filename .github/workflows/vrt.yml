@@ -59,10 +59,34 @@ jobs:
         run: npm run build
 
       - name: Start Server & Take Screenshots
+        timeout-minutes: 10
         run: |
-          npm start &
-          npx wait-on http://localhost:3000
+          # Start dev server in background
+          npm run dev > /tmp/server.log 2>&1 &
+          SERVER_PID=$!
+          echo "Server PID: $SERVER_PID"
+          
+          # Wait for server to be ready (with retries)
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null 2>&1; then
+              echo "✅ Server is ready"
+              break
+            fi
+            echo "Waiting for server... ($i/30)"
+            sleep 1
+            if [ $i -eq 30 ]; then
+              echo "❌ Server failed to start"
+              cat /tmp/server.log
+              exit 1
+            fi
+          done
+          
+          # Take screenshots
           npm run screenshot
+          
+          # Kill server
+          kill $SERVER_PID 2>/dev/null || true
+          wait $SERVER_PID 2>/dev/null || true
 
       - name: Run reg-suit
         run: npm run regression
