@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="프론트엔드 개발자 포트폴리오. React, TypeScript, Tailwind CSS를 중심으로 사용자 경험을 중시한 웹 애플리케이션을 개발합니다.">
+  <meta property="og:title" content="프론트엔드 개발자 | 포트폴리오" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio.example.com" />
+  <meta property="og:description" content="프론트엔드 개발자 포트폴리오. React, TypeScript, Tailwind CSS 등 최신 기술을 활용한 개발 경험." />
+
+  <title>프론트엔드 개발자 | 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* スキルタグアニメーション */
+    .skill-tag {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-tag.show {
+      opacity: 1;
+      transform: translateX(0);
+      animation: tagShake 0.8s cubic-bezier(.36, .07, .19, .97);
+    }
+
+    @keyframes tagShake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      15%,
+      45% {
+        transform: translateX(-4px) rotate(-1deg);
+      }
+      30%,
+      60% {
+        transform: translateX(4px) rotate(1deg);
+      }
+      75% {
+        transform: translateX(-2px) rotate(-0.5deg);
+      }
+      90% {
+        transform: translateX(2px) rotate(0.5deg);
+      }
+    }
+
+    /* プロジェクトアニメーション */
+    .project-item {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .project-item.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ヘロセクション */
+    .hero-text {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-text:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .hero-text:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .hero-text:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900">
+  <!-- 네비게이션 -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-200">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Dev Portfolio
+      </div>
+      <ul class="hidden md:flex gap-8">
+        <li><a href="#about" class="hover:text-blue-600 transition">소개</a></li>
+        <li><a href="#skills" class="hover:text-blue-600 transition">기술</a></li>
+        <li><a href="#summary" class="hover:text-blue-600 transition">요약</a></li>
+        <li><a href="#projects" class="hover:text-blue-600 transition">프로젝트</a></li>
+        <li><a href="#contact" class="hover:text-blue-600 transition">연락</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 히어로 섹션 -->
+  <section id="about" class="w-full pt-40 pb-20 bg-gradient-to-b from-slate-50 to-white">
+    <div class="container mx-auto px-4 flex flex-col items-center justify-center text-center">
+      <div class="max-w-2xl">
+        <div class="hero-text">
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">
+            안녕하세요,<br />
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              프론트엔드 개발자
+            </span>입니다
+          </h1>
+        </div>
+        <div class="hero-text">
+          <p class="text-xl md:text-2xl text-gray-600 mb-8">
+            사용자 경험을 중시한,<br />
+            모던 웹 애플리케이션 개발
+          </p>
+        </div>
+        <div class="hero-text">
+          <p class="text-gray-600 mb-12 leading-relaxed">
+            React, TypeScript, Tailwind CSS를 중심으로,<br />
+            확장성과 유지보수성이 높은 프론트엔드를 구축합니다.<br />
+            최신 기술을 학습하며 사용자에게 가치를 제공하는 것을 목표로 합니다.
+          </p>
+        </div>
+        <div class="hero-text flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#projects" 
+            class="px-8 py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition">
+            프로젝트 보기
+          </a>
+          <a href="#contact" 
+            class="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full font-bold hover:bg-blue-50 transition">
+            연락하기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기술 섹션 -->
+  <section id="skills" class="w-full py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          스킬 & 기술 스택
+        </h2>
+        <p class="text-gray-600 text-lg">
+          실무에서 활용하는 기술
+        </p>
+      </div>
+
+      <!-- Frontend -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Frontend</h3>
+        <div class="flex flex-wrap gap-3 justify-center md:justify-start max-w-4xl">
+          <div class="skill-tag bg-blue-50 border-2 border-blue-600 rounded-full px-6 py-3">
+            <span class="text-blue-600 font-bold">React</span>
+          </div>
+          <div class="skill-tag bg-yellow-50 border-2 border-yellow-600 rounded-full px-6 py-3">
+            <span class="text-yellow-600 font-bold">TypeScript</span>
+          </div>
+          <div class="skill-tag bg-cyan-50 border-2 border-cyan-600 rounded-full px-6 py-3">
+            <span class="text-cyan-600 font-bold">Tailwind CSS</span>
+          </div>
+          <div class="skill-tag bg-purple-50 border-2 border-purple-600 rounded-full px-6 py-3">
+            <span class="text-purple-600 font-bold">Next.js</span>
+          </div>
+          <div class="skill-tag bg-green-50 border-2 border-green-600 rounded-full px-6 py-3">
+            <span class="text-green-600 font-bold">Vue.js</span>
+          </div>
+        </div>
+      </div>
+
+          <!-- Design & Collaboration -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Design & Collaboration</h3>
+        <div class="flex flex-wrap gap-3 justify-center md:justify-start max-w-4xl">
+          <div class="skill-tag bg-blue-50 border-2 border-blue-500 rounded-full px-6 py-3">
+            <span class="text-blue-500 font-bold">Figma</span>
+          </div>
+          <div class="skill-tag bg-gray-50 border-2 border-gray-600 rounded-full px-6 py-3">
+            <span class="text-gray-600 font-bold">Git</span>
+          </div>
+          <div class="skill-tag bg-purple-50 border-2 border-purple-500 rounded-full px-6 py-3">
+            <span class="text-purple-500 font-bold">Responsive Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 경력 요약(표) -->
+  <section id="summary" class="w-full py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">경력 요약</h2>
+        <p class="text-gray-600 text-lg">표 형식으로 정리한 핵심 정보</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-xl font-bold mb-3">OS</h3>
+          <p class="text-gray-700">MacOS, Windows10, Linux(Ubuntu)</p>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-xl font-bold mb-3">언어</h3>
+          <p class="text-gray-700">JavaScript / TypeScript (Next.js, React, Tailwind CSS)</p>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-xl font-bold mb-3">DB</h3>
+          <p class="text-gray-700">PostgreSQL, Prisma</p>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-xl font-bold mb-3">사용툴</h3>
+          <p class="text-gray-700">Cursor, VS Code, Git, GitHub, GitBucket, Slack, Notion</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <h3 class="text-2xl font-bold mb-4">프로젝트 요약</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm md:text-base border-collapse">
+            <tbody>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600 w-40">기간</th>
+                <td class="py-3">2025/08/01 ~ 2025/12/31 (5개월)</td>
+              </tr>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600">서비스유형</th>
+                <td class="py-3">B2B</td>
+              </tr>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600">프로젝트 종류</th>
+                <td class="py-3">Car Sharing</td>
+              </tr>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600">시스템</th>
+                <td class="py-3">PWA</td>
+              </tr>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600">DB</th>
+                <td class="py-3">Neon (PostgreSQL)</td>
+              </tr>
+              <tr class="border-b">
+                <th class="text-left py-3 pr-4 text-gray-600">언어</th>
+                <td class="py-3">TypeScript, JavaScript, Node.js / Express(Node.js)</td>
+              </tr>
+              <tr>
+                <th class="text-left py-3 pr-4 text-gray-600">기술스택</th>
+                <td class="py-3">Next(React), Tailwind, Node.js, VS Code, GitHub(Issue), Vercel</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-6">
+          <h4 class="text-xl font-bold mb-3">참여공정</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+            <div class="px-3 py-2 rounded bg-gray-100">조사분석: X</div>
+            <div class="px-3 py-2 rounded bg-gray-100">요건정의: X</div>
+            <div class="px-3 py-2 rounded bg-green-100 text-green-700 font-semibold">기본/상세설계: O</div>
+            <div class="px-3 py-2 rounded bg-green-100 text-green-700 font-semibold">단위테스트: O</div>
+            <div class="px-3 py-2 rounded bg-green-100 text-green-700 font-semibold">결합테스트: O</div>
+            <div class="px-3 py-2 rounded bg-green-100 text-green-700 font-semibold">통합테스트: O</div>
+            <div class="px-3 py-2 rounded bg-gray-100">운영테스트: X</div>
+            <div class="px-3 py-2 rounded bg-gray-100">운영/보수: X</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 프로젝트 섹션 -->
+  <section id="projects" class="w-full py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          주요 프로젝트
+        </h2>
+        <p class="text-gray-600 text-lg">
+          실서비스 운영 경험을 포함한 핵심 프로젝트
+        </p>
+      </div>
+
+      <div class="space-y-16 max-w-5xl mx-auto">
+        <div class="project-item flex flex-col gap-8 bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition">
+          <div>
+            <div class="inline-block bg-blue-100 text-blue-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
+              Next.js × PWA
+            </div>
+            <h3 class="text-3xl font-bold text-gray-900 mb-3">
+              차세대 전기차(Tesla) 카셰어링 관리 시스템 (MVP)!!
+            </h3>
+            <div class="text-gray-700 mb-6 leading-relaxed">
+              <div class="inline-block bg-yellow-100 text-yellow-700 text-sm font-bold px-3 py-1 rounded-full mb-3">
+                셀링 포인트
+              </div>
+              <p class="font-semibold">
+                노트북 한 대로 풀스택을 끝까지 만들고, 실제 서비스 운영까지 경험했습니다.
+              </p>
+              <p class="mt-2">
+                0→1 풀스택 MVP 개발: 신규 서비스 기획 단계부터 참여해 프론트엔드 기반을 설계·구현했습니다.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm font-semibold">Next.js 15</span>
+              <span class="bg-cyan-50 text-cyan-600 px-3 py-1 rounded-full text-sm font-semibold">Tailwind CSS</span>
+              <span class="bg-gray-50 text-gray-600 px-3 py-1 rounded-full text-sm font-semibold">Shadcn UI</span>
+              <span class="bg-green-50 text-green-600 px-3 py-1 rounded-full text-sm font-semibold">Neon(PostgreSQL)</span>
+              <span class="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">Prisma</span>
+              <span class="bg-orange-50 text-orange-600 px-3 py-1 rounded-full text-sm font-semibold">Auth0</span>
+            </div>
+          </div>
+
+          <div class="grid gap-6">
+            <div>
+              <h4 class="text-xl font-bold mb-3">주요 역할 및 성과</h4>
+              <ol class="list-decimal pl-6 space-y-3 text-gray-700">
+                <li>
+                  <strong>프론트엔드 및 인증 시스템 구축</strong>
+                  <ul class="list-disc pl-6 mt-2 space-y-2">
+                    <li>Auth0 기반 인증 인프라 구축: Next.js(SSR) 환경에서 인증 컨텍스트 설계 및 보안 환경 설정</li>
+                    <li>운영 효율화를 위한 관리자 UI 개발: 권한 제어 및 CRUD용 재사용 모달/컴포넌트 구현</li>
+                    <li>최신 기술 스택 적용: Next.js 15, Tailwind CSS, Shadcn UI 기반 인터페이스 구축</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>기술적 문제 해결 (Troubleshooting)</strong>
+                  <ul class="list-disc pl-6 mt-2 space-y-2">
+                    <li>DB 연동 안정화: Prisma & Neon(PostgreSQL) 연동 시 환경변수 캐시/SSL 이슈 스크립트화로 해결</li>
+                    <li>렌더링 최적화: Hydration 오류 해결로 사용자 경험(UX) 개선</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>운영테스트 및 관리자 매뉴얼 작성</strong>
+                  <ul class="list-disc pl-6 mt-2 space-y-2">
+                    <li>버그 검증 및 관리자 매뉴얼 완성</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연락처 섹션 -->
+  <section id="contact" class="w-full py-20 bg-gradient-to-b from-blue-600 to-purple-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        함께 프로젝트를<br />
+        성공시켜 봅시다
+      </h2>
+      <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto opacity-90">
+        새로운 프로젝트나 프론트엔드 개발에 대한 문의는 편하게 연락 주세요.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a href="mailto:contact@example.com" 
+          class="px-8 py-4 bg-white text-blue-600 rounded-full font-bold text-lg hover:bg-gray-100 transition inline-block">
+          이메일로 상담하기
+        </a>
+        <a href="#" 
+          class="px-8 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition inline-block">
+          이력서 다운로드
+        </a>
+      </div>
+
+      <div class="flex justify-center gap-8">
+        <a href="#" class="opacity-80 hover:opacity-100 transition">
+          <span class="text-2xl">GitHub</span>
+        </a>
+        <a href="#" class="opacity-80 hover:opacity-100 transition">
+          <span class="text-2xl">LinkedIn</span>
+        </a>
+        <a href="#" class="opacity-80 hover:opacity-100 transition">
+          <span class="text-2xl">Twitter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="w-full bg-gray-900 text-gray-400 py-12">
+    <div class="container mx-auto px-4 text-center">
+      <p class="mb-4">© 2026 Frontend Developer Portfolio. All rights reserved.</p>
+      <div class="flex justify-center gap-6">
+        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // スキルタグアニメーション
+    document.addEventListener('DOMContentLoaded', function () {
+      const skillTags = document.querySelectorAll('.skill-tag');
+      let tagAnimationExecuted = false;
+
+      const showTag = (index) => {
+        if (index >= skillTags.length) return;
+        setTimeout(() => {
+          skillTags[index].classList.add('show');
+          showTag(index + 1);
+        }, 150);
+      };
+
+      const handleTagScroll = () => {
+        if (tagAnimationExecuted) return;
+        const tagSection = document.querySelector('.skill-tag');
+        if (!tagSection) return;
+
+        const rect = tagSection.parentElement.parentElement.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8) {
+          tagAnimationExecuted = true;
+          setTimeout(() => {
+            showTag(0);
+          }, 200);
+          window.removeEventListener('scroll', handleTagScroll);
+        }
+      };
+
+      window.addEventListener('scroll', handleTagScroll);
+      handleTagScroll();
+    });
+
+    // プロジェクトアニメーション
+    document.addEventListener('DOMContentLoaded', function () {
+      const projects = document.querySelectorAll('.project-item');
+      let projectAnimationExecuted = false;
+
+      const showProject = (index) => {
+        if (index >= projects.length) return;
+        const rect = projects[index].getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8) {
+          projects[index].classList.add('show');
+          setTimeout(() => {
+            showProject(index + 1);
+          }, 400);
+        } else {
+          requestAnimationFrame(() => showProject(index));
+        }
+      };
+
+      const handleProjectScroll = () => {
+        if (!projectAnimationExecuted) {
+          projectAnimationExecuted = true;
+          showProject(0);
+        }
+      };
+
+      window.addEventListener('scroll', handleProjectScroll);
+      handleProjectScroll();
+    });
+
+    // スムーススクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

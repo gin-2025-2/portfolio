@@ -1,0 +1,15 @@
+{
+    "core": {
+        "workingDir": ".reg",
+        "actualDir": ".reg/actual",
+        "expectedDir": ".reg/expected",
+        "thresholdRate": 0,
+        "ximgdiff": {
+            "invocationType": "client"
+        }
+    },
+    "plugins": {
+        "reg-keygen-git-hash-plugin": false
+    }
+  }
+}
