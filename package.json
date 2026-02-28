@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "screenshot": "playwright test tests/vrt.spec.ts",
-    "regression": "reg-suit run"
+    "regression": "reg-suit run",
+    "regression:local": "./regression.sh"
   },
   "dependencies": {
     "clsx": "^2.1.1",
