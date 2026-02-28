@@ -73,7 +73,7 @@ jobs:
             sleep 1
           done
           
-          # Create actual directory and take screenshots
+          # Take screenshots
           mkdir -p .reg/actual
           npm run screenshot
           cp screenshot/index.png .reg/actual/index.png
@@ -81,10 +81,16 @@ jobs:
           # Kill server
           kill $SERVER_PID 2>/dev/null || true
 
-      - name: Run reg-suit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run regression
+      - name: Generate VRT Report
+        run: npx reg-cli .reg/actual .reg/expected .reg/diff -R .reg/index.html
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.reg
+          cname: portfolio.local
 
       - name: Comment PR
         uses: actions/github-script@v7
