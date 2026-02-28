@@ -8,7 +8,7 @@ export function CareerSummary({ careers }: { careers: Career[] }) {
     const t = useTranslations("Career");
 
     return (
-        <section id="career" className="py-20 bg-gray-50 dark:bg-zinc-900">
+        <section id="career" className="py-20 bg-blue-50 dark:bg-zinc-900">
             <div className="container mx-auto px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
