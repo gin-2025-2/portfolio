@@ -70,6 +70,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_REGION: auto
           AWS_DEFAULT_REGION: auto
+          AWS_ENDPOINT_URL: https://3abd8e35859e1c4640b3ee8ebbef35fc.r2.cloudflarestorage.com
 
       - name: Comment PR
         uses: actions/github-script@v7
