@@ -65,11 +65,11 @@ jobs:
       - name: Run reg-suit
         run: npm run regression
         env:
-          GITHUB_TOKEN: ${{ secrets.PORTFOLIO_VRT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment PR
         uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && always()
         with:
           script: |
             const reportUrl = 'https://gin-2025-2.github.io/portfolio/';
