@@ -1,1 +1,1 @@
-{"failedItems":["index.png"],"newItems":[],"deletedItems":[],"passedItems":[],"expectedItems":["index.png"],"actualItems":["index.png"],"diffItems":["index.png"],"actualDir":"./.reg/actual","expectedDir":"./.reg/expected","diffDir":"./.reg/diff"}
+{"failedItems":[],"newItems":[],"deletedItems":[],"passedItems":["index.png"],"expectedItems":["index.png"],"actualItems":["index.png"],"diffItems":[],"actualDir":"./.reg/actual","expectedDir":"./.reg/expected","diffDir":"./.reg/diff"}

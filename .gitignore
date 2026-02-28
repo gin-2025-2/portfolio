@@ -37,8 +37,8 @@ yarn-error.log*
 .vercel
 
 # typescript
-# VRT
-.reg/
+# VRT - Track expected and actual for comparison, ignore only diff and report
+.reg/diff/
 screenshot/
 
 test-results/.last-run.json
