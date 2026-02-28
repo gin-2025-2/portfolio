@@ -35,7 +35,7 @@
     "reg-keygen-git-hash-plugin": "^0.14.5",
     "reg-notify-github-plugin": "^0.14.5",
     "reg-publish-github-pages-plugin": "^0.0.6",
-    "reg-suit": "^0.14.5",
+    "reg-suit": "^0.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
