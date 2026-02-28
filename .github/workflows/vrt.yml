@@ -77,10 +77,16 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           script: |
-            const reportUrl = 'https://gin-2025-2.github.io/portfolio/';
+
+            const r2Domain = "https://pub-058a1c1e6a5b46a3b722f7e2ffecc739.r2.dev"; 
+
+           
+            const sha = context.payload.pull_request.head.sha;
+            const reportUrl = `${r2Domain}/${sha}/index.html`;
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🎨 **Visual Regression Test Report**\n\nThe visual regression test has completed.\nCheck the latest report here: [View VRT Report](${reportUrl})`
+              body: `🎨 **Visual Regression Test Report**\n\nVRT 결과가 업데이트되었습니다. 아래 링크에서 확인하세요!\n\n🔗 [리포트 보기](${reportUrl})`
             })
