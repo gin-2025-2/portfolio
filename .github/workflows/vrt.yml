@@ -148,3 +148,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./vrt-deploy
           force_orphan: true
+          enable_jekyll: false
