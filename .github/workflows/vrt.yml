@@ -120,19 +120,43 @@ jobs:
           echo "  - Versioned: https://gin-2025-2.github.io/portfolio/vrt-reports/${COMMIT_HASH}/"
           echo "REPORT_URL=https://gin-2025-2.github.io/portfolio/vrt-reports/${COMMIT_HASH}/" >> $GITHUB_ENV
           
-          # 디버그: 배포될 파일 확인
-          echo "📁 Root files:"
-          ls -lah actual.png expected.png 2>/dev/null || echo "  (no images in root)"
-          echo "📁 Versioned files:"
-          ls -lah "$REPORT_DIR/"actual.png "$REPORT_DIR/"expected.png 2>/dev/null || echo "  (no images in versioned)"
+          # 배포 디렉토리 확인
+          echo "📁 Files to deploy:"
+          find . -maxdepth 2 \( -name "*.png" -o -name "index.html" \) -type f | head -20
 
       - name: Deploy to gh-pages
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          REPORT_DIR="vrt-reports/${COMMIT_HASH}"
+          
+          # gh-pages 브랜치 클론 (기존 데이터 보존)
+          git clone --depth=1 --branch=gh-pages https://github.com/${{ github.repository }}.git .gh-pages-repo || true
+          
+          # 기존 파일 복사
+          if [ -d ".gh-pages-repo" ]; then
+            cp -r .gh-pages-repo/.git ./.gh-pages-repo-git || true
+            rm -rf .gh-pages-repo
+          fi
+          
+          # 새 데이터를 위한 deploy 폴더 준비
+          mkdir -p deploy-content
+          cp -r .reg/* deploy-content/
+          cp -r vrt-reports deploy-content/ 2>/dev/null || true
+          mkdir -p deploy-content/vrt-reports/${COMMIT_HASH}
+          cp -r .reg/* deploy-content/vrt-reports/${COMMIT_HASH}/
+          
+          echo "✅ Deploy content prepared"
+          ls -lah deploy-content/
+      
+      - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          force_orphan: false
+          publish_dir: ./deploy-content
+          keep_files: true
+          enable_jekyll: false
+          commit_message: "chore: update VRT report - ${{ github.sha }}"
           enable_jekyll: false
 
       - name: Comment PR
