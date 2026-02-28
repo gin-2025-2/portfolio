@@ -22,13 +22,13 @@ echo ""
 
 # Step 2: Create required directories
 echo "📍 Step 2: Creating directories..."
-mkdir -p .reg/expected .reg/actual
+mkdir -p .reg/expected .reg/actual .reg/diff
 echo "✅ Directories ready"
 echo ""
 
 # Step 3: Take screenshots
 echo "📍 Step 3: Taking screenshots..."
-npm run test 2>&1 | tail -20
+npm run screenshot
 echo "✅ Screenshots captured"
 echo ""
 
@@ -43,9 +43,9 @@ fi
 echo "✅ Baseline ready"
 echo ""
 
-# Step 5: Run regression test with reg-suit
-echo "📍 Step 5: Running regression test..."
-npm run regression
+# Step 5: Run regression test with reg-cli
+echo "📍 Step 5: Running local regression test..."
+npx reg-cli .reg/actual .reg/expected .reg/diff -R .reg/index.html -I
 echo "✅ Regression test complete"
 echo ""
 
