@@ -37,8 +37,8 @@ yarn-error.log*
 .vercel
 
 # typescript
-# VRT - Track expected and actual for comparison, ignore only diff and report
-.reg/diff/
+# VRT - All reports and screenshots ignored, published via reg-suit to gh-pages
+.reg/
 screenshot/
 
 test-results/.last-run.json
