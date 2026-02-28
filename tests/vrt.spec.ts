@@ -31,3 +31,4 @@ test('Home Page Screenshot', async ({ page }) => {
     // Take full page screenshot to temp location
     await page.screenshot({ path: 'screenshot/index.png', fullPage: true });
 });
+
