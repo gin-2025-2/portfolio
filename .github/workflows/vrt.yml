@@ -109,13 +109,22 @@ jobs:
           REPORT_DIR="vrt-reports/${COMMIT_HASH}"
           
           mkdir -p "$REPORT_DIR"
+          # 해시 폴더에 모든 리포트 파일 복사 (이미지 포함)
           cp -r .reg/* "$REPORT_DIR/"
           
-          # 최신 리포트도 루트에 복사 (빠른 접근용)
+          # 최신 리포트도 루트에 복사 (빠른 접근용) - 이미지도 포함
           cp -r .reg/* .
           
-          echo "✅ Report prepared at: $REPORT_DIR"
+          echo "✅ Report prepared:"
+          echo "  - Latest: https://gin-2025-2.github.io/portfolio/"
+          echo "  - Versioned: https://gin-2025-2.github.io/portfolio/vrt-reports/${COMMIT_HASH}/"
           echo "REPORT_URL=https://gin-2025-2.github.io/portfolio/vrt-reports/${COMMIT_HASH}/" >> $GITHUB_ENV
+          
+          # 디버그: 배포될 파일 확인
+          echo "📁 Root files:"
+          ls -lah actual.png expected.png 2>/dev/null || echo "  (no images in root)"
+          echo "📁 Versioned files:"
+          ls -lah "$REPORT_DIR/"actual.png "$REPORT_DIR/"expected.png 2>/dev/null || echo "  (no images in versioned)"
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
