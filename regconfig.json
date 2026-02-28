@@ -9,11 +9,6 @@
     },
     "plugins": {
         "reg-keygen-git-hash-plugin": true,
-        "reg-publish-github-pages-plugin": {
-            "pathPrefix": "portfolio",
-            "repository": "gin-2025-2/portfolio",
-            "ghpagesPublishBranch": "gh-pages",
-            "token": "$GITHUB_TOKEN"
-        }
+        "reg-publish-github-pages-plugin": false
     }
 }

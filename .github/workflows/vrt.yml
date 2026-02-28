@@ -12,6 +12,8 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  pages: write
+  id-token: write
 
 jobs:
   vrt:
@@ -64,8 +66,29 @@ jobs:
 
       - name: Run reg-suit
         run: npm run regression
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to gh-pages
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Setup credentials for git push
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+          git fetch origin gh-pages
+          git worktree add .gh-pages-tmp gh-pages
+          
+          # Copy report to gh-pages
+          cp -r .reg/* .gh-pages-tmp/
+          
+          cd .gh-pages-tmp
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: update VRT report from ${{ github.sha }}"
+          git push origin gh-pages
+          
+          cd ..
+          git worktree remove .gh-pages-tmp
 
       - name: Comment PR
         uses: actions/github-script@v7
